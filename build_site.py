@@ -210,6 +210,7 @@ body{display:flex;flex-direction:column}
 .stat-num{font-size:18px;font-weight:600;color:var(--text-primary);line-height:1;font-variant-numeric:tabular-nums}
 .stat-label{font-size:9px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--text-muted);margin-top:1px;white-space:nowrap}
 .stat-div{width:1px;height:28px;background:var(--border)}
+#scope-note{font-weight:400;color:var(--navy);display:none}
 #subject-nav{display:flex;align-items:center;gap:6px;overflow-x:auto;scrollbar-width:none}
 #subject-nav::-webkit-scrollbar{display:none}
 .stab{padding:5px 13px;border-radius:20px;border:1.5px solid var(--navy);font-size:11.5px;font-weight:500;cursor:pointer;background:var(--surface);color:var(--navy);display:flex;align-items:center;gap:5px;transition:all .15s;white-space:nowrap;flex-shrink:0}
@@ -231,6 +232,13 @@ body{display:flex;flex-direction:column}
 .itab:hover{border-color:var(--text-primary);color:var(--text-primary)}
 .itab.active{background:var(--text-primary);border-color:var(--text-primary);color:#fff}
 #sort-select{margin-left:auto;font-size:10.5px;font-family:'DM Sans',sans-serif;color:var(--text-secondary);background:var(--surface);border:1.5px solid var(--border);border-radius:14px;padding:4px 8px;cursor:pointer}
+.radius-row{display:none;width:100%;align-items:center;gap:6px;flex-wrap:wrap;margin-top:8px;padding-top:8px;border-top:1px solid var(--border-light)}
+.radius-row.show{display:flex}
+#radius-label{font-size:10.5px;color:var(--text-muted);white-space:nowrap}
+#radius-label b{color:var(--navy);font-weight:600}
+.rtab{padding:3px 9px;border-radius:12px;border:1.5px solid var(--border);font-size:10px;font-weight:500;cursor:pointer;background:var(--surface);color:var(--text-secondary);transition:all .15s}
+.rtab:hover{border-color:var(--navy);color:var(--navy)}
+.rtab.active{background:var(--navy);border-color:var(--navy);color:#fff}
 #proj-list{flex:1;min-height:0;overflow-y:auto;padding:8px 0}
 #proj-list::-webkit-scrollbar{width:4px}
 #proj-list::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px}
@@ -273,7 +281,7 @@ body{display:flex;flex-direction:column}
 .popup-row-value{font-weight:500;font-family:'DM Mono',monospace}
 .cmarker{width:30px;height:30px;border:2.5px solid #fff;border-radius:50% 50% 50% 0;transform:rotate(-45deg);box-shadow:var(--shadow-md);cursor:pointer}
 .cmarker.subject{width:38px;height:38px;border-width:3px}
-#legend{position:absolute;right:12px;bottom:28px;z-index:800;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow-md);padding:10px 12px;font-size:10.5px;color:var(--text-secondary)}
+#legend{position:absolute;left:12px;bottom:36px;z-index:800;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow-md);padding:10px 12px;font-size:10.5px;color:var(--text-secondary)}
 .leg-row{display:flex;align-items:center;gap:7px;margin-bottom:5px}
 .leg-row:last-child{margin-bottom:0}
 .leg-dot{width:11px;height:11px;border-radius:50% 50% 50% 0;transform:rotate(-45deg);flex-shrink:0}
@@ -292,15 +300,15 @@ body{display:flex;flex-direction:column}
   #sidebar{width:100%;flex:0 0 auto;height:30vh;min-height:220px;max-height:280px;overflow-y:auto;-webkit-overflow-scrolling:touch;border-left:none;border-top:1px solid var(--border);box-shadow:0 -2px 8px rgba(0,0,0,0.04)}
   #proj-list{flex:none;overflow-y:visible}
   #detail.open{max-height:2000px}
-  .stab,.pcard,.stat-chip,.itab{touch-action:manipulation}
-  #legend{left:12px;right:auto;bottom:12px}
+  .stab,.pcard,.stat-chip,.itab,.rtab{touch-action:manipulation}
+  #legend{left:12px;bottom:12px}
 }
 </style>
 </head>
 <body>
 <div id="header">
   <div id="header-left">
-    <div id="header-title"><strong>Existing Townhome Supply</strong></div>
+    <div id="header-title"><strong>Existing Townhome Supply</strong><span id="scope-note"></span></div>
   </div>
   <div id="subject-nav">
     <div class="stab" data-subject="River Valley Townhomes"><span class="sicon"></span>River Valley Townhomes</div>
@@ -308,18 +316,8 @@ body{display:flex;flex-direction:column}
   </div>
   <div id="header-right">
     <div class="stat-chip">
-      <div class="stat-num" id="stat-total">0</div>
-      <div class="stat-label">Properties</div>
-    </div>
-    <div class="stat-div"></div>
-    <div class="stat-chip">
       <div class="stat-num" id="stat-units">0</div>
-      <div class="stat-label">Total Units</div>
-    </div>
-    <div class="stat-div"></div>
-    <div class="stat-chip">
-      <div class="stat-num" id="stat-inc">0</div>
-      <div class="stat-label">Included</div>
+      <div class="stat-label">Supply Units</div>
     </div>
     <div class="stat-div"></div>
     <div class="stat-chip">
@@ -349,6 +347,15 @@ body{display:flex;flex-direction:column}
           <option value="name">Sort: Name</option>
           <option value="year">Sort: Year Built</option>
         </select>
+        <div class="radius-row" id="radius-row">
+          <span id="radius-label">Within of <b id="radius-subject-name"></b>:</span>
+          <div class="rtab" data-radius="0.5">0.5km</div>
+          <div class="rtab" data-radius="1">1km</div>
+          <div class="rtab" data-radius="2">2km</div>
+          <div class="rtab" data-radius="3">3km</div>
+          <div class="rtab" data-radius="5">5km</div>
+          <div class="rtab active" data-radius="all">All</div>
+        </div>
       </div>
     </div>
     <div id="proj-list"></div>
@@ -388,7 +395,10 @@ function setIncluded(id, val) {
   try { localStorage.setItem(STORAGE_KEY, JSON.stringify(included)); } catch (e) {}
 }
 
-let activeId = null, markers = {}, popups = {}, incFilter = 'all', sortMode = 'distance', activeSubjectTab = null;
+let activeId = null, markers = {}, popups = {}, incFilter = 'all', sortMode = 'distance', activeSubjectTab = null, activeRadius = null, radiusCircle = null;
+
+var SHORT_NAME = {'River Valley Townhomes': 'River Valley', 'Pleasantview Townhomes': 'Pleasantview'};
+function shortName(n) { return SHORT_NAME[n] || n; }
 
 const map = L.map('map', {zoomControl: false, attributionControl: false});
 L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}', {maxZoom: 19}).addTo(map);
@@ -408,16 +418,55 @@ function haversineKm(lat1, lng1, lat2, lng2) {
   return R * c;
 }
 
-function nearestSubjectDist(p) {
-  if (p.subject) return 0;
-  var best = null;
+function subjectByName(name) {
+  return subjectSites.find(function(s) { return s.name === name; });
+}
+
+function nearestSubjectInfo(p) {
+  if (p.subject) return {dist: 0, name: p.name};
+  var best = null, bestName = null;
   subjectSites.forEach(function(s) {
     var d = haversineKm(p.lat, p.lng, s.lat, s.lng);
-    if (best === null || d < best) best = d;
+    if (best === null || d < best) { best = d; bestName = s.name; }
   });
-  return best;
+  return {dist: best, name: bestName};
 }
-PROJECTS.forEach(function(p) { p._dist = nearestSubjectDist(p); });
+PROJECTS.forEach(function(p) {
+  var info = nearestSubjectInfo(p);
+  p._dist = info.dist;
+  p._distName = info.name;
+});
+
+// Distance used for display/sort/filtering: to the active subject-site
+// context if one is selected (so numbers always match what's on screen),
+// otherwise to whichever subject site is nearest. Only the active anchor
+// itself is distance 0 — the *other* subject site still gets a real
+// distance so it can't slip through a radius filter.
+function activeDist(p) {
+  if (activeSubjectTab) {
+    if (p.name === activeSubjectTab) return 0;
+    var s = subjectByName(activeSubjectTab);
+    return haversineKm(p.lat, p.lng, s.lat, s.lng);
+  }
+  return p._dist;
+}
+function activeDistName(p) {
+  return activeSubjectTab || p._distName;
+}
+function shouldShowDist(p) {
+  if (!activeSubjectTab) return !p.subject;
+  return p.name !== activeSubjectTab;
+}
+
+function inScope(p) {
+  // The active subject site (the one anchoring the radius filter) always
+  // shows. Everything else, including the *other* subject site, is
+  // subject to the same radius test so a distant comparison site doesn't
+  // sneak into an "X km from here" view.
+  if (activeSubjectTab && p.name === activeSubjectTab) return true;
+  if (!activeSubjectTab || activeRadius === null) return true;
+  return activeDist(p) <= activeRadius;
+}
 
 var bounds = L.latLngBounds(PROJECTS.map(function(p) { return [p.lat, p.lng]; }));
 map.fitBounds(bounds, {padding: [40, 40]});
@@ -440,7 +489,7 @@ function markerIcon(active, p) {
 }
 
 function popupHTML(p) {
-  var distText = p.subject ? null : (p._dist.toFixed(1) + ' km to nearest subject site');
+  var distText = shouldShowDist(p) ? (activeDist(p).toFixed(1) + ' km to ' + shortName(activeDistName(p))) : null;
   return '<div class="popup-inner">'
     + (p.subject ? '<div class="popup-tag">Subject Site</div>' : '')
     + '<div class="popup-name">' + p.name + '</div>'
@@ -460,19 +509,16 @@ PROJECTS.forEach(function(p) {
 });
 
 function refreshStats() {
-  var total = PROJECTS.length;
-  var units = PROJECTS.reduce(function(s, p) { return s + (p.units || 0); }, 0);
-  var incCount = PROJECTS.filter(function(p) { return isIncluded(p.id); }).length;
-  var incUnits = PROJECTS.filter(function(p) { return isIncluded(p.id); }).reduce(function(s, p) { return s + (p.units || 0); }, 0);
-  document.getElementById('stat-total').textContent = total;
+  var scoped = PROJECTS.filter(function(p) { return inScope(p) && !p.subject; });
+  var units = scoped.reduce(function(s, p) { return s + (p.units || 0); }, 0);
+  var incUnits = scoped.filter(function(p) { return isIncluded(p.id); }).reduce(function(s, p) { return s + (p.units || 0); }, 0);
   document.getElementById('stat-units').textContent = units.toLocaleString();
-  document.getElementById('stat-inc').textContent = incCount;
   document.getElementById('stat-inc-units').textContent = incUnits.toLocaleString();
 }
 
 function sortedProjects(list) {
   var arr = list.slice();
-  if (sortMode === 'distance') arr.sort(function(a,b) { return a._dist - b._dist; });
+  if (sortMode === 'distance') arr.sort(function(a,b) { return activeDist(a) - activeDist(b); });
   else if (sortMode === 'units') arr.sort(function(a,b) { return b.units - a.units; });
   else if (sortMode === 'name') arr.sort(function(a,b) { return a.name.localeCompare(b.name); });
   else if (sortMode === 'year') arr.sort(function(a,b) { return (a.year_built||9999) - (b.year_built||9999); });
@@ -482,13 +528,15 @@ function sortedProjects(list) {
 function buildSidebar() {
   var list = document.getElementById('proj-list');
   list.innerHTML = '';
+  var scopedTotal = PROJECTS.filter(inScope).length;
   var visible = PROJECTS.filter(function(p) {
+    if (!inScope(p)) return false;
     if (incFilter === 'included') return isIncluded(p.id);
     if (incFilter === 'excluded') return !isIncluded(p.id);
     return true;
   });
   visible = sortedProjects(visible);
-  document.getElementById('sb-count').textContent = visible.length + ' of ' + PROJECTS.length;
+  document.getElementById('sb-count').textContent = visible.length + ' of ' + scopedTotal;
   visible.forEach(function(p) {
     var inc = isIncluded(p.id);
     var card = document.createElement('div');
@@ -496,7 +544,7 @@ function buildSidebar() {
     var metaBits = [];
     if (p.subdivision) metaBits.push(p.subdivision);
     metaBits.push((p.year_built || 'Yr N/A'));
-    if (!p.subject) metaBits.push(p._dist.toFixed(1) + ' km');
+    if (shouldShowDist(p)) metaBits.push(activeDist(p).toFixed(1) + ' km to ' + shortName(activeDistName(p)));
     var nameHtml = (p.subject ? '<span class="stag">Subject Site</span>' : '') + p.name;
     var checkboxHtml = p.subject ? '' : ('<div class="pinclude"><input type="checkbox" ' + (inc ? 'checked' : '') + ' data-toggle-id="' + p.id + '"/></div>');
     card.innerHTML = '<div class="pcard-body">'
@@ -557,6 +605,71 @@ function buildDetail(p) {
   }
 }
 
+function updateMapVisibility() {
+  PROJECTS.forEach(function(p) {
+    var m = markers[p.id];
+    if (inScope(p)) {
+      if (!map.hasLayer(m)) m.addTo(map);
+      m.setIcon(markerIcon(activeId === p.id, p));
+    } else {
+      if (map.hasLayer(m)) m.remove();
+      if (activeId === p.id) {
+        activeId = null;
+        document.getElementById('detail').classList.remove('open');
+      }
+    }
+  });
+}
+
+function updateRadiusCircle() {
+  if (radiusCircle) { map.removeLayer(radiusCircle); radiusCircle = null; }
+  if (activeSubjectTab && activeRadius !== null) {
+    var s = subjectByName(activeSubjectTab);
+    radiusCircle = L.circle([s.lat, s.lng], {
+      radius: activeRadius * 1000,
+      color: '#2a3f5f', weight: 1.5, dashArray: '4,4',
+      fillColor: '#2a3f5f', fillOpacity: 0.06
+    }).addTo(map);
+  }
+}
+
+function updateScopeNote() {
+  var el = document.getElementById('scope-note');
+  if (activeSubjectTab && activeRadius !== null) {
+    el.textContent = ' — within ' + activeRadius + 'km of ' + shortName(activeSubjectTab);
+    el.style.display = 'inline';
+  } else {
+    el.textContent = '';
+    el.style.display = 'none';
+  }
+}
+
+function activateSubjectContext(name) {
+  var changed = activeSubjectTab !== name;
+  activeSubjectTab = name;
+  if (changed) activeRadius = null;
+  document.querySelectorAll('.stab').forEach(function(t) { t.classList.toggle('active', t.dataset.subject === name); });
+  document.getElementById('radius-subject-name').textContent = shortName(name);
+  document.getElementById('radius-row').classList.add('show');
+  document.querySelectorAll('.rtab').forEach(function(t) { t.classList.toggle('active', t.dataset.radius === (activeRadius === null ? 'all' : String(activeRadius))); });
+  updateRadiusCircle();
+  updateMapVisibility();
+  updateScopeNote();
+  refreshStats();
+}
+
+function clearSubjectContext() {
+  activeSubjectTab = null;
+  activeRadius = null;
+  document.querySelectorAll('.stab').forEach(function(t) { t.classList.remove('active'); });
+  document.querySelectorAll('.rtab').forEach(function(t) { t.classList.toggle('active', t.dataset.radius === 'all'); });
+  document.getElementById('radius-row').classList.remove('show');
+  updateRadiusCircle();
+  updateMapVisibility();
+  updateScopeNote();
+  refreshStats();
+}
+
 function selectProject(id) {
   if (activeId !== null && activeId !== id) {
     var prev = PROJECTS[activeId];
@@ -586,31 +699,47 @@ function selectProject(id) {
 
 function syncSubjectTabs() {
   var activeName = activeId !== null ? PROJECTS[activeId].name : null;
-  activeSubjectTab = (activeName === 'River Valley Townhomes' || activeName === 'Pleasantview Townhomes') ? activeName : null;
-  document.querySelectorAll('.stab').forEach(function(tab) {
-    tab.classList.toggle('active', tab.dataset.subject === activeSubjectTab);
-  });
+  var isSubject = activeName === 'River Valley Townhomes' || activeName === 'Pleasantview Townhomes';
+  if (isSubject) {
+    activateSubjectContext(activeName);
+  } else {
+    document.querySelectorAll('.stab').forEach(function(tab) {
+      tab.classList.toggle('active', tab.dataset.subject === activeSubjectTab);
+    });
+  }
 }
 
 document.querySelectorAll('.stab').forEach(function(tab) {
   tab.addEventListener('click', function() {
     var name = tab.dataset.subject;
     if (activeSubjectTab === name) {
-      activeSubjectTab = null;
-      if (activeId !== null) {
-        var p = PROJECTS[activeId];
-        markers[activeId].setIcon(markerIcon(false, p));
+      if (activeId !== null && PROJECTS[activeId].name === name) {
+        markers[activeId].setIcon(markerIcon(false, PROJECTS[activeId]));
         markers[activeId].closePopup();
+        activeId = null;
+        document.getElementById('detail').classList.remove('open');
       }
-      activeId = null;
-      document.getElementById('detail').classList.remove('open');
-      document.querySelectorAll('.stab').forEach(function(t) { t.classList.remove('active'); });
+      clearSubjectContext();
       map.fitBounds(bounds, {padding: [40, 40]});
       buildSidebar();
       return;
     }
     var target = PROJECTS.find(function(p) { return p.name === name; });
     if (target) selectProject(target.id);
+  });
+});
+
+document.querySelectorAll('.rtab').forEach(function(tab) {
+  tab.addEventListener('click', function() {
+    var val = tab.dataset.radius;
+    activeRadius = val === 'all' ? null : parseFloat(val);
+    document.querySelectorAll('.rtab').forEach(function(t) { t.classList.remove('active'); });
+    tab.classList.add('active');
+    updateRadiusCircle();
+    updateMapVisibility();
+    updateScopeNote();
+    refreshStats();
+    buildSidebar();
   });
 });
 
