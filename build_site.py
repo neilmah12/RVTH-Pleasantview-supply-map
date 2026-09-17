@@ -523,7 +523,6 @@ function buildSidebar() {
     var card = document.createElement('div');
     card.className = 'pcard' + (activeId === p.id ? ' active' : '') + (!inc && !p.subject ? ' excluded' : '');
     var metaBits = [];
-    if (p.subdivision) metaBits.push(p.subdivision);
     metaBits.push((p.year_built || 'Yr N/A'));
     if (shouldShowDist(p)) metaBits.push(activeDist(p).toFixed(1) + ' km to ' + shortName(activeDistName(p)));
     var nameHtml = (p.subject ? '<span class="stag">Subject Site</span>' : '') + p.name;
@@ -567,7 +566,6 @@ function buildDetail(p) {
     '<div class="dfield"><div class="dflabel">Total Units</div><div class="dfval">' + (p.units != null ? p.units : 'N/A') + '</div></div>'
     + '<div class="dfield"><div class="dflabel">Year Built</div><div class="dfval">' + (p.year_built || 'N/A') + '</div></div>'
     + '<div class="dfield full"><div class="dflabel">Address</div><div class="dfval">' + p.address + '</div></div>'
-    + (p.subdivision ? '<div class="dfield full"><div class="dflabel">Subdivision</div><div class="dfval">' + p.subdivision + '</div></div>' : '')
     + distFields;
   var btn = document.getElementById('det-toggle');
   if (p.subject) {
