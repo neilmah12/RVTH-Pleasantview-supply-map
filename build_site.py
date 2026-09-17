@@ -137,6 +137,8 @@ PROJECTS = [
     {"id": 120, "name": "Heritage Place", "address": "10741 25 AVE NW", "units": 40, "year_built": None, "subdivision": None, "lat": 53.4556315651811, "lng": -113.506644825932, "subject": False},
     {"id": 121, "name": "Rundle Heights II", "address": "2916 113 AVE NW", "units": 97, "year_built": 1980, "subdivision": "Rundle Heights", "lat": 53.5671090889655, "lng": -113.388399187608, "subject": False},
     {"id": 122, "name": "South Ridge Townhomes", "address": "10542 45 AVE NW", "units": 178, "year_built": 1971, "subdivision": None, "lat": 53.4825364968663, "lng": -113.501697172947, "subject": False},
+    {"id": 123, "name": "Shadow Ridge", "address": "2041 SADDLEBACK RD NW", "units": 60, "year_built": 1978, "subdivision": None, "lat": 53.4494685401771, "lng": -113.518216749446, "subject": False},
+    {"id": 124, "name": "Yellowbird II", "address": "10470 16 AVE NW", "units": 39, "year_built": 1988, "subdivision": None, "lat": 53.4463045390151, "lng": -113.498768469235, "subject": False},
 ]
 
 
@@ -469,7 +471,7 @@ function popupHTML(p) {
   return '<div class="popup-inner">'
     + (p.subject ? '<div class="popup-tag">Subject Site</div>' : '')
     + '<div class="popup-name">' + p.name + '</div>'
-    + '<div class="popup-sub">' + p.units + ' units' + (p.year_built ? ' &middot; Built ' + p.year_built : '') + '</div>'
+    + '<div class="popup-sub">' + (p.units != null ? p.units + ' units' : 'Units N/A') + (p.year_built ? ' &middot; Built ' + p.year_built : '') + '</div>'
     + '<div class="popup-row"><span class="popup-row-label">Address</span><span class="popup-row-value">' + p.address + '</span></div>'
     + (distText ? '<div class="popup-row"><span class="popup-row-label">Proximity</span><span class="popup-row-value">' + distText + '</span></div>' : '')
     + '</div>';
@@ -524,7 +526,7 @@ function buildSidebar() {
     var nameHtml = (p.subject ? '<span class="stag">Subject Site</span>' : '') + p.name;
     var checkboxHtml = p.subject ? '' : ('<div class="pinclude"><input type="checkbox" ' + (inc ? 'checked' : '') + ' data-toggle-id="' + p.id + '"/></div>');
     card.innerHTML = '<div class="pcard-body">'
-      + '<div class="pcard-top"><div class="pname">' + nameHtml + '</div><div class="pbadge">' + p.units + ' units</div></div>'
+      + '<div class="pcard-top"><div class="pname">' + nameHtml + '</div><div class="pbadge">' + (p.units != null ? p.units + ' units' : 'N/A') + '</div></div>'
       + '<div class="pmeta">' + metaBits.join(' &middot; ') + '</div>'
       + '</div>' + checkboxHtml;
     card.addEventListener('click', function(e) {
@@ -559,7 +561,7 @@ function buildDetail(p) {
     });
   }
   document.getElementById('det-grid').innerHTML =
-    '<div class="dfield"><div class="dflabel">Total Units</div><div class="dfval">' + p.units + '</div></div>'
+    '<div class="dfield"><div class="dflabel">Total Units</div><div class="dfval">' + (p.units != null ? p.units : 'N/A') + '</div></div>'
     + '<div class="dfield"><div class="dflabel">Year Built</div><div class="dfval">' + (p.year_built || 'N/A') + '</div></div>'
     + '<div class="dfield full"><div class="dflabel">Address</div><div class="dfval">' + p.address + '</div></div>'
     + (p.subdivision ? '<div class="dfield full"><div class="dflabel">Subdivision</div><div class="dfval">' + p.subdivision + '</div></div>' : '')
