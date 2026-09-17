@@ -139,8 +139,9 @@ PROJECTS = [
     {"id": 126, "name": "10608 106 St Nw", "address": "10608 106 ST NW", "units": 7, "year_built": 1955, "subdivision": "Central McDougall", "lat": 53.550003102771, "lng": -113.503448475852, "subject": False},
     {"id": 127, "name": "Royal Castle", "address": "257 DUNLUCE RD NW", "units": 17, "year_built": 1980, "subdivision": "Dunluce", "lat": 53.626652003092, "lng": -113.532159008799, "subject": False},
     {"id": 128, "name": "The Village at Southgate", "address": "10707 47 AVE NW", "units": 650, "year_built": 1978, "subdivision": "Empire Park", "lat": 53.484293005189, "lng": -113.509197036507, "subject": False},
-    {"id": 129, "name": "Empire Park", "address": "4420 106 ST NW", "units": 220, "year_built": 1972, "subdivision": "Empire Park", "lat": 53.482952110229, "lng": -113.505477902249, "subject": False},
-    {"id": 130, "name": "Pleasantview Townhomes", "address": "4905 107 ST NW", "units": 216, "year_built": 1961, "subdivision": "Empire Park", "lat": 53.48704977, "lng": -113.5066457, "subject": True},
+    {"id": 129, "name": "Pleasantview Townhomes", "address": "4905 107 ST NW", "units": 216, "year_built": 1961, "subdivision": "Empire Park", "lat": 53.48704977, "lng": -113.5066457, "subject": True},
+    {"id": 130, "name": "Lord Byron Townhomes", "address": "1 ROYAL RD NW", "units": 147, "year_built": 1968, "subdivision": None, "lat": 53.4816929720353, "lng": -113.538963371898, "subject": False},
+    {"id": 131, "name": "Heritage Place", "address": "10741 25 AVE NW", "units": 40, "year_built": None, "subdivision": None, "lat": 53.4556315651811, "lng": -113.506644825932, "subject": False},
 ]
 
 
@@ -277,11 +278,6 @@ body{display:flex;flex-direction:column}
 .popup-row-value{font-weight:500;font-family:'DM Mono',monospace}
 .cmarker{width:30px;height:30px;border:2.5px solid #fff;border-radius:50% 50% 50% 0;transform:rotate(-45deg);box-shadow:var(--shadow-md);cursor:pointer}
 .cmarker.subject{width:38px;height:38px;border-width:3px}
-#legend{position:absolute;left:12px;bottom:36px;z-index:800;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow-md);padding:10px 12px;font-size:10.5px;color:var(--text-secondary)}
-.leg-row{display:flex;align-items:center;gap:7px;margin-bottom:5px}
-.leg-row:last-child{margin-bottom:0}
-.leg-dot{width:11px;height:11px;border-radius:50% 50% 50% 0;transform:rotate(-45deg);flex-shrink:0}
-
 @media (max-width:768px){
   #header{flex-wrap:wrap;height:auto;padding:10px 12px 8px;gap:8px;align-items:flex-start;box-shadow:0 1px 3px rgba(0,0,0,0.07)}
   #header-left{width:100%}
@@ -297,7 +293,6 @@ body{display:flex;flex-direction:column}
   #proj-list{flex:none;overflow-y:visible}
   #detail.open{max-height:2000px}
   .stab,.pcard,.stat-chip,.itab,.rtab{touch-action:manipulation}
-  #legend{left:12px;bottom:12px}
 }
 </style>
 </head>
@@ -325,11 +320,6 @@ body{display:flex;flex-direction:column}
 </div>
 <div id="layout">
   <div id="map"></div>
-  <div id="legend">
-    <div class="leg-row"><span class="leg-dot" style="background:var(--navy)"></span>Subject site</div>
-    <div class="leg-row"><span class="leg-dot" style="background:var(--accent)"></span>Included comp</div>
-    <div class="leg-row"><span class="leg-dot" style="background:var(--grey)"></span>Excluded comp</div>
-  </div>
   <div id="sidebar">
     <div id="sb-head">
       <div id="sb-head-top"><h2>Townhome Supply</h2><span id="sb-count"></span></div>
