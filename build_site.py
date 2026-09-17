@@ -17,7 +17,7 @@ PROJECTS = [
     {"id": 0, "name": "Youngstown Townhomes and Apartments", "address": "16316 106A AVE NW", "units": 36, "year_built": 1964, "subdivision": "Youngstown", "lat": 53.550930015534, "lng": -113.604708990829, "subject": False},
     {"id": 1, "name": "Wedgewood Homes", "address": "12269 131 ST NW", "units": 143, "year_built": 1962, "subdivision": "Sherbrooke", "lat": 53.576998279233, "lng": -113.550342709548, "subject": False},
     {"id": 2, "name": "Summerfield", "address": "3003 116 ST NW", "units": 67, "year_built": 1977, "subdivision": "Sweet Grass", "lat": 53.46249599171, "lng": -113.531042036382, "subject": False},
-    {"id": 3, "name": "River Valley Townhomes", "address": "4210 102 AVE NW", "units": 216, "year_built": 1960, "subdivision": "Gold Bar", "lat": 53.54408191682, "lng": -113.409712479175, "subject": True},
+    {"id": 3, "name": "River Valley Townhomes", "address": "4210 102 AVE NW", "units": 216, "year_built": 1960, "subdivision": "Gold Bar", "lat": 53.54266311905697, "lng": -113.41360683773034, "subject": True},
     {"id": 4, "name": "Delton Townhomes", "address": "8313 130 AVE NW", "units": 280, "year_built": 1960, "subdivision": "Killarney", "lat": 53.587731012883, "lng": -113.469072027816, "subject": False},
     {"id": 5, "name": "Elmwood Townhomes", "address": "8319 169 ST NW", "units": 200, "year_built": 1962, "subdivision": "Elmwood", "lat": 53.517786000631, "lng": -113.610950994124, "subject": False},
     {"id": 6, "name": "Oxford Mews", "address": "13107 153 AVE NW", "units": 180, "year_built": 2004, "subdivision": "Cumberland", "lat": 53.615558596149, "lng": -113.546020497357, "subject": False},
