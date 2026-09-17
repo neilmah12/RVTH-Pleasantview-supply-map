@@ -136,7 +136,7 @@ PROJECTS = [
     {"id": 123, "name": "Shadow Ridge", "address": "2041 SADDLEBACK RD NW", "units": 60, "year_built": 1978, "subdivision": None, "lat": 53.4494685401771, "lng": -113.518216749446, "subject": False},
     {"id": 124, "name": "Yellowbird II", "address": "10470 16 AVE NW", "units": 39, "year_built": 1988, "subdivision": None, "lat": 53.4463045390151, "lng": -113.498768469235, "subject": False},
     {"id": 125, "name": "Park Haven", "address": "3307 116A AVE NW", "units": 204, "year_built": 1980, "subdivision": None, "lat": 53.5681589095027, "lng": -113.392937919315, "subject": False},
-    {"id": 126, "name": "Abbotsfield", "address": "353 ABBOTSFIELD RD NW", "units": 132, "year_built": 1974, "subdivision": None, "lat": 53.5747682675171, "lng": -113.388308593721, "subject": False},
+    {"id": 126, "name": "Abbottsfield", "address": "353 ABBOTSFIELD RD NW", "units": 132, "year_built": 1974, "subdivision": None, "lat": 53.5747682675171, "lng": -113.388308593721, "subject": False},
     {"id": 127, "name": "Hermitage III", "address": "1181 HYNDMAN RD NW", "units": 58, "year_built": 1982, "subdivision": None, "lat": 53.5758496641324, "lng": -113.376870349513, "subject": False},
 ]
 
