@@ -130,11 +130,14 @@ PROJECTS = [
     {"id": 117, "name": "Royal Castle", "address": "257 DUNLUCE RD NW", "units": 17, "year_built": 1980, "subdivision": "Dunluce", "lat": 53.626652003092, "lng": -113.532159008799, "subject": False},
     {"id": 118, "name": "Pleasantview Townhomes", "address": "4905 107 ST NW", "units": 216, "year_built": 1961, "subdivision": "Empire Park", "lat": 53.48704977, "lng": -113.5066457, "subject": True},
     {"id": 119, "name": "Lord Byron Townhomes", "address": "1 ROYAL RD NW", "units": 147, "year_built": 1968, "subdivision": None, "lat": 53.4816929720353, "lng": -113.538963371898, "subject": False},
-    {"id": 120, "name": "Heritage Place", "address": "10741 25 AVE NW", "units": 40, "year_built": None, "subdivision": None, "lat": 53.4556315651811, "lng": -113.506644825932, "subject": False},
+    {"id": 120, "name": "Heritage Place", "address": "10741 25 AVE NW", "units": 40, "year_built": 1978, "subdivision": None, "lat": 53.4556315651811, "lng": -113.506644825932, "subject": False},
     {"id": 121, "name": "Rundle Heights II", "address": "2916 113 AVE NW", "units": 97, "year_built": 1980, "subdivision": "Rundle Heights", "lat": 53.5671090889655, "lng": -113.388399187608, "subject": False},
     {"id": 122, "name": "South Ridge Townhomes", "address": "10542 45 AVE NW", "units": 178, "year_built": 1971, "subdivision": None, "lat": 53.4825364968663, "lng": -113.501697172947, "subject": False},
     {"id": 123, "name": "Shadow Ridge", "address": "2041 SADDLEBACK RD NW", "units": 60, "year_built": 1978, "subdivision": None, "lat": 53.4494685401771, "lng": -113.518216749446, "subject": False},
     {"id": 124, "name": "Yellowbird II", "address": "10470 16 AVE NW", "units": 39, "year_built": 1988, "subdivision": None, "lat": 53.4463045390151, "lng": -113.498768469235, "subject": False},
+    {"id": 125, "name": "Park Haven", "address": "3307 116A AVE NW", "units": 204, "year_built": 1980, "subdivision": None, "lat": 53.5681589095027, "lng": -113.392937919315, "subject": False},
+    {"id": 126, "name": "Abbotsfield", "address": "353 ABBOTSFIELD RD NW", "units": 132, "year_built": 1974, "subdivision": None, "lat": 53.5747682675171, "lng": -113.388308593721, "subject": False},
+    {"id": 127, "name": "Hermitage III", "address": "1181 HYNDMAN RD NW", "units": 58, "year_built": 1982, "subdivision": None, "lat": 53.5758496641324, "lng": -113.376870349513, "subject": False},
 ]
 
 
