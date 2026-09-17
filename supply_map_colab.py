@@ -134,14 +134,14 @@ PROJECTS = [
     {"id": 121, "name": "Claremont Court", "address": "4204 139 AVE NW", "units": 144, "year_built": 2001, "subdivision": "Clareview Campus", "lat": 53.601203916409, "lng": -113.406837486386, "subject": False},
     {"id": 122, "name": "Ermineskin II", "address": "10720 24 AVE NW", "units": 51, "year_built": 1981, "subdivision": "Ermineskin", "lat": 53.455365003764, "lng": -113.506631000669, "subject": False},
     {"id": 123, "name": "Arcadia Gardens", "address": "4217 135 AVE NW", "units": 20, "year_built": 1974, "subdivision": "Sifton Park", "lat": 53.595422079598, "lng": -113.40747861816, "subject": False},
-    {"id": 124, "name": "Greenwood Acres", "address": "29 ST & 116A AVE NW", "units": 178, "year_built": 1972, "subdivision": "Rundle Heights", "lat": 53.568586997487, "lng": -113.387584003335, "subject": False},
-    {"id": 125, "name": "Hillclaire Estates", "address": "14106 22A ST NW", "units": 22, "year_built": 1979, "subdivision": "Bannerman", "lat": 53.604919404539, "lng": -113.376594490081, "subject": False},
-    {"id": 126, "name": "10608 106 St Nw", "address": "10608 106 ST NW", "units": 7, "year_built": 1955, "subdivision": "Central McDougall", "lat": 53.550003102771, "lng": -113.503448475852, "subject": False},
-    {"id": 127, "name": "Royal Castle", "address": "257 DUNLUCE RD NW", "units": 17, "year_built": 1980, "subdivision": "Dunluce", "lat": 53.626652003092, "lng": -113.532159008799, "subject": False},
-    {"id": 128, "name": "The Village at Southgate", "address": "10707 47 AVE NW", "units": 650, "year_built": 1978, "subdivision": "Empire Park", "lat": 53.484293005189, "lng": -113.509197036507, "subject": False},
-    {"id": 129, "name": "Pleasantview Townhomes", "address": "4905 107 ST NW", "units": 216, "year_built": 1961, "subdivision": "Empire Park", "lat": 53.48704977, "lng": -113.5066457, "subject": True},
-    {"id": 130, "name": "Lord Byron Townhomes", "address": "1 ROYAL RD NW", "units": 147, "year_built": 1968, "subdivision": None, "lat": 53.4816929720353, "lng": -113.538963371898, "subject": False},
-    {"id": 131, "name": "Heritage Place", "address": "10741 25 AVE NW", "units": 40, "year_built": None, "subdivision": None, "lat": 53.4556315651811, "lng": -113.506644825932, "subject": False},
+    {"id": 124, "name": "Hillclaire Estates", "address": "14106 22A ST NW", "units": 22, "year_built": 1979, "subdivision": "Bannerman", "lat": 53.604919404539, "lng": -113.376594490081, "subject": False},
+    {"id": 125, "name": "10608 106 St Nw", "address": "10608 106 ST NW", "units": 7, "year_built": 1955, "subdivision": "Central McDougall", "lat": 53.550003102771, "lng": -113.503448475852, "subject": False},
+    {"id": 126, "name": "Royal Castle", "address": "257 DUNLUCE RD NW", "units": 17, "year_built": 1980, "subdivision": "Dunluce", "lat": 53.626652003092, "lng": -113.532159008799, "subject": False},
+    {"id": 127, "name": "The Village at Southgate", "address": "10707 47 AVE NW", "units": 650, "year_built": 1978, "subdivision": "Empire Park", "lat": 53.484293005189, "lng": -113.509197036507, "subject": False},
+    {"id": 128, "name": "Pleasantview Townhomes", "address": "4905 107 ST NW", "units": 216, "year_built": 1961, "subdivision": "Empire Park", "lat": 53.48704977, "lng": -113.5066457, "subject": True},
+    {"id": 129, "name": "Lord Byron Townhomes", "address": "1 ROYAL RD NW", "units": 147, "year_built": 1968, "subdivision": None, "lat": 53.4816929720353, "lng": -113.538963371898, "subject": False},
+    {"id": 130, "name": "Heritage Place", "address": "10741 25 AVE NW", "units": 40, "year_built": None, "subdivision": None, "lat": 53.4556315651811, "lng": -113.506644825932, "subject": False},
+    {"id": 131, "name": "Rundle Heights II", "address": "2916 113 AVE NW", "units": 97, "year_built": 1980, "subdivision": "Rundle Heights", "lat": 53.5671090889655, "lng": -113.388399187608, "subject": False},
 ]
 
 
@@ -183,9 +183,7 @@ _BASE = """<!DOCTYPE html>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
-<style>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script><style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
   --bg:#f7f6f3;--surface:#fff;--border:#e8e5df;--border-light:#f0ede8;
@@ -215,8 +213,6 @@ body{display:flex;flex-direction:column}
 .stab.active{background:var(--navy);color:#fff}
 .stab .sicon{width:7px;height:7px;border-radius:2px;background:var(--navy);flex-shrink:0}
 .stab.active .sicon{background:#fff}
-#export-btn{padding:6px 14px;border-radius:20px;border:1.5px solid var(--border);font-size:11.5px;font-weight:500;cursor:pointer;background:var(--text-primary);color:#fff;display:flex;align-items:center;gap:6px;transition:all .15s;white-space:nowrap;flex-shrink:0}
-#export-btn:hover{background:var(--accent)}
 #layout{flex:1;min-height:0;display:flex}
 #map{flex:1;min-height:0}
 #sidebar{width:360px;flex-shrink:0;background:var(--surface);border-left:1px solid var(--border);display:flex;flex-direction:column;overflow:hidden;box-shadow:-2px 0 8px rgba(0,0,0,0.04)}
@@ -315,7 +311,6 @@ body{display:flex;flex-direction:column}
       <div class="stat-num" id="stat-inc-units">0</div>
       <div class="stat-label">Included Units</div>
     </div>
-    <button id="export-btn">Export to Excel</button>
   </div>
 </div>
 <div id="layout">
@@ -334,7 +329,7 @@ body{display:flex;flex-direction:column}
           <option value="year">Sort: Year Built</option>
         </select>
         <div class="radius-row" id="radius-row">
-          <span id="radius-label">Within of <b id="radius-subject-name"></b>:</span>
+          <span id="radius-label">Proximity to <b id="radius-subject-name"></b>:</span>
           <div class="rtab" data-radius="0.5">0.5km</div>
           <div class="rtab" data-radius="1">1km</div>
           <div class="rtab" data-radius="2">2km</div>
@@ -741,28 +736,6 @@ document.querySelectorAll('.itab').forEach(function(tab) {
 document.getElementById('sort-select').addEventListener('change', function(e) {
   sortMode = e.target.value;
   buildSidebar();
-});
-
-document.getElementById('export-btn').addEventListener('click', function() {
-  var rows = PROJECTS.map(function(p) {
-    return {
-      'Property Name': p.name,
-      'Address': p.address,
-      'Number of Units': p.units,
-      'Year Built': p.year_built || '',
-      'Subdivision': p.subdivision || '',
-      'Subject Site': p.subject ? 'Yes' : 'No',
-      'Included': isIncluded(p.id) ? 'Yes' : 'No',
-      'Distance to River Valley Townhomes (km)': p.subject && p.name === 'River Valley Townhomes' ? 0 : haversineKm(p.lat, p.lng, subjectSites.find(function(s){return s.name==='River Valley Townhomes';}).lat, subjectSites.find(function(s){return s.name==='River Valley Townhomes';}).lng).toFixed(2),
-      'Distance to Pleasantview Townhomes (km)': p.subject && p.name === 'Pleasantview Townhomes' ? 0 : haversineKm(p.lat, p.lng, subjectSites.find(function(s){return s.name==='Pleasantview Townhomes';}).lat, subjectSites.find(function(s){return s.name==='Pleasantview Townhomes';}).lng).toFixed(2),
-      'Latitude': p.lat,
-      'Longitude': p.lng
-    };
-  });
-  var ws = XLSX.utils.json_to_sheet(rows);
-  var wb = XLSX.utils.book_new();
-  XLSX.utils.book_append_sheet(wb, ws, 'Existing Townhome Supply');
-  XLSX.writeFile(wb, 'existing_townhome_supply.xlsx');
 });
 
 refreshStats();
