@@ -80,3 +80,16 @@ later, the initial view will automatically tighten with it.
    to the `rvth-pleasantview-supply` Firebase project ID. If your Firebase
    project ID differs, update it in both files.
 5. Push to `main` — the workflow builds and deploys automatically.
+
+## Drive-times page (branch `claude/rvth-supply-drive-times`)
+
+`build_drive_times.py` writes `public/drive-times.html`, a single-purpose page
+for marketing screenshots: River Valley Townhomes vs the 12 comps within 5 km
+straight-line, showing straight-line km against actual driving km (route
+lines on the map, dumbbell chart and average detour factor in the side panel).
+It does not touch `build_site.py` or the main map.
+
+- Data: `data/river_valley_drive_times.json` (OpenRouteService driving routes,
+  generated once in Colab; rerun if comps are added or moved).
+- Add `?clean` to the URL to hide the zoom buttons for a cleaner screenshot.
+- Click a row or pin to highlight that comp's route.
