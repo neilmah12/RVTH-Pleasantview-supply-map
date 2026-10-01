@@ -87,8 +87,8 @@ body.clean .leaflet-control-zoom{display:none}
   <h1>Nearby comps are farther than they look</h1>
   <div id="headline"><div class="big" id="h-big"></div><div class="txt" id="h-txt"></div></div>
   <div id="legend">
-    <span><svg width="22" height="8"><line x1="0" y1="4" x2="22" y2="4" stroke="#3d3a36" stroke-width="1.6" stroke-dasharray="4 4"/></svg>Straight line</span>
-    <span><svg width="22" height="8"><line x1="0" y1="4" x2="22" y2="4" stroke="#1f6fd1" stroke-width="3"/></svg>Driving route</span>
+    <span><svg width="12" height="12"><circle cx="6" cy="6" r="4.2" fill="#fff" stroke="#3d3a36" stroke-width="1.8"/></svg>Straight-line km</span>
+    <span><svg width="22" height="8"><line x1="0" y1="4" x2="22" y2="4" stroke="#1f6fd1" stroke-width="3"/></svg>Driving route / drive km</span>
   </div>
   <div id="chart"></div>
   <div id="foot">Distances in km from River Valley Townhomes (4210 102 Ave NW). Drive distance is the shortest driving route. Routing: openrouteservice.org, &copy; OpenStreetMap contributors.</div>
@@ -115,9 +115,8 @@ L.control.attribution({position: 'bottomleft', prefix: false}).addAttribution('&
 const layers = {};
 C.forEach(function(c, i) {
   var route = L.polyline(c.route.map(function(pt) { return [pt[1], pt[0]]; }), {color: '#1f6fd1', weight: 3.5, opacity: .7, lineJoin: 'round'}).addTo(map);
-  var line = L.polyline([[S.lat, S.lng], [c.lat, c.lng]], {color: '#3d3a36', weight: 1.6, opacity: .8, dashArray: '4 6'}).addTo(map);
   var pin = L.marker([c.lat, c.lng], {zIndexOffset: 500, icon: L.divIcon({className: '', html: '<div class="pin">' + (i + 1) + '</div>', iconSize: [22, 22], iconAnchor: [11, 11]})}).addTo(map);
-  layers[i] = {route: route, line: line, pin: pin};
+  layers[i] = {route: route, pin: pin};
   pin.on('click', function() { focusRow(i); });
 });
 
@@ -168,14 +167,12 @@ var active = null;
 function focusRow(i) {
   if (active !== null) {
     layers[active].route.setStyle({opacity: .7, weight: 3.5});
-    layers[active].line.setStyle({opacity: .8, weight: 1.6});
     layers[active].pin.getElement().firstChild.classList.remove('on');
     document.querySelector('.row[data-i="' + active + '"]').classList.remove('on');
   }
   if (active === i) { active = null; return; }
   active = i;
   layers[i].route.setStyle({opacity: 1, weight: 5.5}).bringToFront();
-  layers[i].line.setStyle({opacity: 1, weight: 2.2}).bringToFront();
   layers[i].pin.getElement().firstChild.classList.add('on');
   document.querySelector('.row[data-i="' + i + '"]').classList.add('on');
 }
